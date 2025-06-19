@@ -35,6 +35,7 @@
       margin-right: 60px;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
       animation: fadeIn 2s ease;
+      z-index: 10;
     }
 
     h1 {
@@ -47,6 +48,7 @@
       font-size: 1.3rem;
       margin-bottom: 30px;
       color: #ffffff;
+      white-space: pre-line;
     }
 
     button {
@@ -90,7 +92,7 @@
       animation: bounce 1s infinite;
     }
 
-    .hearts {
+    .hearts, .crackers {
       position: absolute;
       top: 0;
       left: 0;
@@ -98,6 +100,7 @@
       height: 100%;
       pointer-events: none;
       overflow: hidden;
+      z-index: 1;
     }
 
     .heart {
@@ -128,15 +131,24 @@
       left: -10px;
       top: 0;
     }
+
+    .cracker {
+      position: absolute;
+      width: 5px;
+      height: 20px;
+      animation: shoot 1s linear forwards;
+    }
+
+    @keyframes shoot {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
   </style>
 </head>
 <body>
 
-<!-- 🎶 Background Music 🎶 -->
-<audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<div class="hearts" id="heartRain"></div>
+<div class="crackers" id="crackerContainer"></div>
 
 <div class="container" id="surpriseBox">
   <h1 class="emoji">🌹</h1>
@@ -144,24 +156,34 @@
   <button onclick="nextStep()">Next ➡️</button>
 </div>
 
-<div class="hearts" id="heartRain" style="display:none;"></div>
-
 <script>
   const steps = [
     { message: "On this day, someone amazing was born...", emoji: "🌹" },
     { message: "That someone makes my world brighter...", emoji: "✨" },
     { message: "And fills my heart with love every day...", emoji: "💖" },
     { message: "Yes, it's YOU – Harshad! 💖", emoji: "😍" },
+    {
+      message: "Since 24th November 2024, my world changed forever...\nThat day we meet first time, and my journey start with you. 💖",
+      emoji: "📅"
+    },
+    {
+      message: "Even when I’m mad, you turn into a living cartoon 🤡\nAnd just like that—my anger disappears with your silliness! 😂",
+      emoji: "🎭"
+    },
     { message: "Wishing you the happiest & most romantic birthday ever!", emoji: "🎉" },
     { message: "I’m lucky to have someone as thoughtful, caring and handsome as you as my boyfriend 💞", emoji: "🧸" },
     { message: "Babe, everything about you is beautiful. You make me so happy every single day. 💞", emoji: "💋" },
-    { message: "Sending loads of hugs 🫂🫂🫂 and kisses 💋💋💋 to you dear 💞", emoji: "🫂" },
-    { message: "🎉 Happy Birthday My Love 🎉", emoji: "🎂" }
+    { message: "Sending lots of hugs 🫂🫂🫂 and kisses 💋💋💋 to you dear 💞", emoji: "🫂" },
+    { message: "Happyyyyyyy Birthdayyyyyy Dear❤️", emoji: "🎂" }
   ];
 
   let currentStep = 0;
   const box = document.getElementById('surpriseBox');
   const hearts = document.getElementById('heartRain');
+  const crackers = document.getElementById('crackerContainer');
+
+  launchHearts();
+  setInterval(launchCrackers, 5000); // 🎆 launch crackers repeatedly
 
   function nextStep() {
     currentStep++;
@@ -198,9 +220,6 @@
         explosion.appendChild(span);
       }, i * 200);
     });
-
-    hearts.style.display = "block";
-    launchHearts();
   }
 
   function launchHearts() {
@@ -212,6 +231,19 @@
       hearts.appendChild(heart);
       setTimeout(() => heart.remove(), 5000);
     }, 200);
+  }
+
+  function launchCrackers() {
+    for (let i = 0; i < 20; i++) {
+      const cracker = document.createElement('div');
+      cracker.classList.add('cracker');
+      cracker.style.left = Math.random() * 100 + 'vw';
+      cracker.style.top = '100vh';
+      cracker.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      cracker.style.animationDuration = `${Math.random() * 1 + 0.5}s`;
+      crackers.appendChild(cracker);
+      setTimeout(() => cracker.remove(), 1200);
+    }
   }
 </script>
 
