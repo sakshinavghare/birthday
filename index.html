@@ -7,43 +7,44 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+      background: url('IMG_20250525_184608.jpg') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
-      flex-direction: column;
+      justify-content: flex-end; /* move to right */
       align-items: center;
-      justify-content: center;
       height: 100vh;
       overflow: hidden;
-      color: #ffc0cb;
+      color: #ffffff;
     }
 
     .container {
-      background: rgba(255, 192, 203, 0.08);
+      background: rgba(0, 0, 0, 0.5);
       padding: 40px;
       border-radius: 20px;
       text-align: center;
       max-width: 600px;
-      box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+      margin-right: 60px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
       animation: fadeIn 2s ease;
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      color: #ff99cc;
+      color: #ffb3e6;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-bottom: 30px;
-      color: #ffe6f2;
+      color: #ffffff;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 10px 25px;
       font-size: 1.1rem;
-      background: #ff4da6;
+      background: #ff3385;
       border: none;
       border-radius: 10px;
       color: white;
@@ -52,7 +53,7 @@
     }
 
     button:hover {
-      background: #e60073;
+      background: #cc0066;
     }
 
     @keyframes fadeIn {
@@ -61,23 +62,13 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(45deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
     }
 
     @keyframes bounce {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.3);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
     }
 
     @keyframes pop {
@@ -133,6 +124,12 @@
 </head>
 <body>
 
+<!-- 🎶 Background Music 🎶 -->
+<audio autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <div class="container" id="surpriseBox">
   <h1 class="emoji">🌹</h1>
   <p>Today is a very special day...</p>
@@ -182,7 +179,7 @@
     explosion.style.display = 'block';
     explosion.innerHTML = '';
     const emojis = ["💋", "💋", "🫂", "💋", "🫂", "💋", "🫂", "💋", "🫂"];
-    
+
     emojis.forEach((emoji, i) => {
       setTimeout(() => {
         const span = document.createElement('span');
