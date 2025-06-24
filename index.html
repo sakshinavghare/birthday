@@ -8,7 +8,6 @@
   <meta property="og:image" content="https://sakshinavghare.github.io/birthday/bg.jpg">
   <meta property="og:url" content="https://sakshinavghare.github.io/birthday/">
   <meta name="twitter:card" content="summary_large_image">
-
   <style>
     body {
       margin: 0;
@@ -47,6 +46,16 @@
       margin-bottom: 30px;
       color: #ffffff;
       white-space: pre-line;
+    }
+
+    .extra-message {
+      font-size: 1rem;
+      color: #ffe6f0;
+      margin-top: 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      line-height: 1.5;
     }
 
     button {
@@ -110,15 +119,8 @@
       border-radius: 50%;
     }
 
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
 
     .bigHeart {
       position: absolute;
@@ -154,14 +156,8 @@
       animation: fadeIn 0.6s ease;
     }
 
-    #messageBox h2 {
-      color: #cc0066;
-    }
-
-    #messageBox p {
-      color: black;
-      font-size: 1.1rem;
-    }
+    #messageBox h2 { color: #cc0066; }
+    #messageBox p { color: black; font-size: 1.1rem; }
 
     #messageBox button {
       background-color: #ff3385;
@@ -192,7 +188,7 @@
   <button onclick="nextStep()">Next ➡️</button>
 </div>
 
-<!-- Custom Message Box -->
+<!-- Message Box -->
 <div id="messageBox">
   <h2>Meet me soon 💖</h2>
   <p>Something special is waiting for you... 💌</p>
@@ -206,19 +202,25 @@
     { message: "That someone makes my world brighter...", emoji: "✨" },
     { message: "And fills my heart with love every day...", emoji: "💖" },
     { message: "Yes, it's YOU – Harshad! 💖", emoji: "😍" },
-    {
-      message: "Since 24th November 2024, my every days changed forever...\nThat day we meet first time, and my journey start with you. 💖",
-      emoji: "📅"
-    },
-    {
-      message: "Even when I’m angry, you turn into a living cartoon 🤡\nAnd just like that—my anger disappears with your silliness! 😂",
-      emoji: "🎭"
-    },
+    { message: "Since 24th November 2024, my every days changed forever...\nThat day we meet first time, and my journey start with you. 💖", emoji: "📅" },
+    { message: "Even when I’m angry, you turn into a living cartoon 🤡\nAnd just like that—my anger disappears with your silliness! 😂", emoji: "🎭" },
     { message: "Wishing you the happiest & most romantic birthday ever!", emoji: "🎉" },
     { message: "I’m lucky to have someone as thoughtful, caring and handsome as you as my boyfriend 💞", emoji: "🧸" },
-    { message: "mr.Harshad😎, everything about you is beautiful. You make me so happy every single day. 💞", emoji: "💋" },
+    { message: "Mr.Harshad😎, everything about you is beautiful. You make me so happy every single day. 💞", emoji: "💋" },
     { message: "Sending lots of hugs 🫂🫂🫂 and kisses 💋💋💋 to you dear 💞", emoji: "🫂" },
-    { message: "Happyyyyyyy Birthdayyyyyy mine CHOTA DON...❤️", emoji: "🎂" }
+    {
+      message: "Happyyyyyyy Birthdayyyyyy mine CHOTA DON...❤️",
+      emoji: "🎂",
+      extra: `I don't know what I mean to you.
+Maybe I'm special, maybe not, only you know that.
+But for me, you are very special.
+This world is full of noise and problems,
+but when I think of you, I feel calm and happy.
+You are like peace in my busy life.
+You make me feel safe, warm, and loved.
+You are my quiet place in a loud world.
+You will always be my Special ❤️‍🩹🌹`
+    }
   ];
 
   let currentStep = 0;
@@ -234,10 +236,11 @@
   function nextStep() {
     currentStep++;
     if (currentStep < steps.length) {
-      const { message, emoji } = steps[currentStep];
+      const { message, emoji, extra } = steps[currentStep];
       box.innerHTML = `
         <h1 class="emoji">${emoji}</h1>
         <p>${message}</p>
+        ${extra ? `<div class="extra-message">${extra}</div>` : ""}
         <button onclick="nextStep()">Next ➡️</button>
       `;
     } else {
@@ -258,8 +261,7 @@
     document.getElementById("messageBox").style.display = "none";
     const explosion = document.getElementById("explosion");
     explosion.innerHTML = '';
-    const emojis = ["💋", "💋", "🫂", "💋", "🫂", "💋", "🫂", "💋", "🫂", "💋", "💋", "🫂", "💋", "🫂", "💋", "🫂", "💋"];
-
+    const emojis = ["💋", "💋", "🫂", "💋", "🫂", "💋", "🫂", "💋", "🫂"];
     emojis.forEach((emoji, i) => {
       setTimeout(() => {
         const span = document.createElement('span');
@@ -312,6 +314,5 @@
     }
   }
 </script>
-
 </body>
 </html>
